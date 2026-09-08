@@ -17,6 +17,7 @@ authorized before the connection can resolve a token at runtime (see Follow-ups)
   connection pattern.
 - Russell discovers the tools through `connection_search` and calls them as
   `github__<tool>`.
+- Requested the `actions` toolset explicitly via the `X-MCP-Toolsets` header.
 
 **Files touched:**
 
@@ -45,6 +46,13 @@ authorized before the connection can resolve a token at runtime (see Follow-ups)
   than app-scoped.
 - No `tools.allow` / `tools.block` filter and no approval gate, matching the
   existing connections in this repo.
+- Sent `X-MCP-Toolsets: default,actions`. The remote server's default toolsets
+  are context, repos, issues, pull_requests, and users; `actions` is not among
+  them, so without this header the Actions-run tools named in the connection
+  description would never have been discoverable. Raised by Codex review on the
+  pull request and verified against GitHub's own toolset documentation before
+  changing anything. Releases, branches, and commits need no extra toolset —
+  they are served by `repos`, which is already a default.
 
 **Follow-ups:**
 
