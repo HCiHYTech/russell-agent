@@ -67,9 +67,11 @@ a token at runtime (see Follow-ups).
 
 - Create and attach the Connect connector so the UID in `connect(...)` resolves, then
   authorize it in a browser. From the repo root:
-  `vercel link`, then
+  `eve link --non-interactive --project russell --team hchy`, then
   `vercel connect create github --name prj_FPn8YlA8sAoC6uoJ3qNaxWp5AgNt`, then
   `vercel connect attach <connector-uid> --yes`.
+  Project linking goes through eve, not `vercel link`, per AGENTS.md; eve wraps only
+  link and deploy, so the two `vercel connect` steps have no eve equivalent.
   If `github` is rejected as a service identifier, the CLI error lists the valid ones.
 - Install/approve the resulting GitHub App in **both** the AIFriendDan and HCiHYTech
   organizations. Authorizing only one leaves the other invisible to Russell.
